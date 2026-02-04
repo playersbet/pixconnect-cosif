@@ -53,5 +53,6 @@ defmodule CosifWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug CORSPlug, origin: ["http://localhost:5173", "http://localhost:5174", "http://localhost:3000"]
   plug CosifWeb.Router
 end
