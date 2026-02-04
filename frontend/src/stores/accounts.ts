@@ -1,6 +1,6 @@
 // frontend/src/stores/accounts.ts
 import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { accountsApi, type Account, type SearchParams } from '@/services/api';
 import { liveSearch, type SearchSuggestion } from '@/services/socket';
 

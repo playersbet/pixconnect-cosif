@@ -1,6 +1,6 @@
 <!-- frontend/src/components/SearchBar.vue -->
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { useDebounceFn } from '@vueuse/core';
 import { useAccountsStore } from '@/stores/accounts';
 
@@ -30,6 +30,12 @@ function onSubmit() {
   showSuggestions.value = false;
   store.search({ q: store.searchQuery, ...store.filters });
 }
+
+function onBlur() {
+  setTimeout(() => {
+    showSuggestions.value = false;
+  }, 200);
+}
 </script>
 
 <template>
@@ -42,7 +48,7 @@ function onSubmit() {
         class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         @input="onInput"
         @focus="showSuggestions = true"
-        @blur="() => setTimeout(() => showSuggestions = false, 200)"
+        @blur="onBlur"
       />
       <button
         type="submit"

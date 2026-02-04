@@ -1,6 +1,6 @@
 <!-- frontend/src/views/SearchView.vue -->
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { useAccountsStore } from '@/stores/accounts';
 import { accountsApi, type Account } from '@/services/api';
 import SearchBar from '@/components/SearchBar.vue';
