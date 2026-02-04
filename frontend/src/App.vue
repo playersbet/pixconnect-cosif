@@ -1,30 +1,42 @@
+<!-- frontend/src/App.vue -->
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="min-h-screen bg-gray-50">
+    <header class="bg-white shadow-sm border-b">
+      <div class="max-w-7xl mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <h1 class="text-2xl font-bold text-gray-900">
+            COSIF
+          </h1>
+          <nav class="flex gap-4">
+            <a href="/" class="text-gray-600 hover:text-gray-900">
+              Busca
+            </a>
+            <a href="/explorer" class="text-gray-600 hover:text-gray-900">
+              Explorador
+            </a>
+            <a href="/docs" class="text-gray-600 hover:text-gray-900">
+              Documentação
+            </a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+      <SearchView />
+    </main>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<script lang="ts">
+import SearchView from '@/views/SearchView.vue';
+
+export default {
+  components: {
+    SearchView,
+  },
+};
+</script>
