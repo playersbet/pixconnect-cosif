@@ -4,6 +4,7 @@ export default defineConfig({
   title: 'COSIF',
   description: 'Plano Contábil das Instituições do Sistema Financeiro Nacional',
   lang: 'pt-BR',
+  base: '/docs/',
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
