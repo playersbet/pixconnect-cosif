@@ -33,9 +33,20 @@ COSIF accounts follow the pattern: `X.X.X.XX.XX.XX-X`
 - Last digit after hyphen is check digit
 
 ## Current Status
-- [ ] Phase 0: Project Setup
-- [ ] Phase 1: PDF Conversion
-- [ ] Phase 2: Backend Development
-- [ ] Phase 3: Frontend Development
-- [ ] Phase 4: Documentation
-- [ ] Phase 5: Deployment
+- [x] Phase 0: Project Setup (CLAUDE.md, README.md, .gitignore)
+- [x] Phase 1: PDF Conversion (scripts/convert_pdfs.py, parse_cosif.py)
+- [x] Phase 2: Backend Development (Phoenix API, Ecto schemas, WebSocket)
+- [x] Phase 3: Frontend Development (Vue 3, Pinia, components)
+- [x] Phase 4: Documentation (VitePress initialized)
+- [x] Phase 5: Deployment (Docker, Terraform for GCP)
+
+## API Endpoints
+```
+GET /api/v1/accounts/:code          # Get account by code
+GET /api/v1/accounts/search         # Search accounts (q, level, group, accepts_credit, accepts_debit)
+GET /api/v1/accounts/:code/children # Get child accounts
+GET /api/v1/accounts/:code/ancestry # Get parent hierarchy
+GET /api/v1/functions/:code         # Get function by code
+GET /api/v1/functions/search        # Search functions
+WS  /socket/websocket               # Live search channel (live_search:lobby)
+```
