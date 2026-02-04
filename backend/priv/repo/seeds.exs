@@ -16,6 +16,11 @@ accounts_data =
 
 IO.puts("Loaded #{length(accounts_data)} accounts")
 
+# Delete existing data for clean re-import
+IO.puts("Clearing existing data...")
+Repo.delete_all(Account)
+Repo.delete_all(Version)
+
 # Create a version for this import
 {:ok, version} =
   %Version{}
@@ -24,7 +29,7 @@ IO.puts("Loaded #{length(accounts_data)} accounts")
     source_file: "accounts_structured.json",
     imported_at: DateTime.utc_now(),
     is_active: true,
-    notes: "Initial import from PDF conversion"
+    notes: "Import from PDF conversion with descriptions"
   })
   |> Repo.insert()
 
@@ -46,12 +51,12 @@ code_to_id =
         name: account_data["name"] || "Unknown",
         level: account_data["level"] || 1,
         version_id: version.id,
-        description: nil,
+        description: account_data["description"],
         accepts_credit: false,
         accepts_debit: false,
         is_analytical: false,
         group_code: String.first(account_data["code"] || "0"),
-        subgroup_code: nil
+        subgroup_code: account_data["base_normativa"]
       })
       |> Repo.insert()
 

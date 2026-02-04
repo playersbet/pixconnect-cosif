@@ -89,14 +89,24 @@ defmodule Cosif.Accounts do
 
     case get_account_by_code(code, version_id) do
       nil -> []
-      account -> build_ancestry(account, [])
+      account -> build_ancestry(account, [], MapSet.new())
     end
   end
 
-  defp build_ancestry(%Account{parent: nil} = account, acc), do: [account | acc]
-  defp build_ancestry(%Account{parent: parent} = account, acc) do
-    parent = Repo.preload(parent, :parent)
-    build_ancestry(parent, [account | acc])
+  defp build_ancestry(%Account{parent: nil} = account, acc, _seen), do: [account | acc]
+  defp build_ancestry(%Account{id: id, parent: parent} = account, acc, seen) do
+    # Prevent infinite loops from circular references
+    if MapSet.member?(seen, id) do
+      [account | acc]
+    else
+      parent = Repo.preload(parent, :parent)
+      # Check if parent is the same as current (self-reference)
+      if parent.id == id do
+        [account | acc]
+      else
+        build_ancestry(parent, [account | acc], MapSet.put(seen, id))
+      end
+    end
   end
 
   # Full-text search
