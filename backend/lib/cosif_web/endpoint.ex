@@ -53,6 +53,6 @@ defmodule CosifWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug CORSPlug, origin: ["http://localhost:5173", "http://localhost:5174", "http://localhost:3000"]
+  plug CORSPlug, origin: ["http://localhost:5173", "http://localhost:5174", "http://localhost:3000", "https://storage.googleapis.com"], methods: ["GET", "POST", "OPTIONS"]
   plug CosifWeb.Router
 end
