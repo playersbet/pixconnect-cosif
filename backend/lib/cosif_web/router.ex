@@ -5,8 +5,16 @@ defmodule CosifWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", CosifWeb do
+  scope "/api/v1", CosifWeb do
     pipe_through :api
+
+    get "/accounts/search", AccountController, :search
+    get "/accounts/:code", AccountController, :show
+    get "/accounts/:code/children", AccountController, :children
+    get "/accounts/:code/ancestry", AccountController, :ancestry
+
+    get "/functions/search", FunctionController, :search
+    get "/functions/:code", FunctionController, :show
   end
 
   # Enable LiveDashboard in development
